@@ -83,6 +83,16 @@ namespace Orc.SystemInfo
                 items.Add(new SystemInfoElement(_languageService.GetString("SystemInfo_AvailableMemory"), memStatus.ullAvailPhys.ToReadableSize()));
             }
 
+            var systemInfo = new Kernel32.SystemInfo();
+            try
+            {
+                Kernel32.GetNativeSystemInfo(systemInfo);
+            }
+            catch(Exception)
+            {
+                // TODO
+            }
+            
             try
             {
                 var cpu = new ManagementObjectSearcher("select * from Win32_Processor")
