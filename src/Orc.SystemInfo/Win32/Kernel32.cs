@@ -17,7 +17,10 @@ namespace Orc.SystemInfo.Win32
         public static extern bool GlobalMemoryStatusEx([In, Out] MemoryStatusEx lpBuffer);
 
         [DllImport("kernel32.dll")]
-        internal static extern void GetNativeSystemInfo([In, Out] SystemInfo lpSystemInfo);
+        public static extern void GetNativeSystemInfo([In, Out] SystemInfo lpSystemInfo);
+
+        [DllImport("kernel32.dll", SetLastError = false)]
+        public static extern bool GetProductInfo(int dwOSMajorVersion, int dwOSMinorVersion, int dwSpMajorVersion, int dwSpMinorVersion, out int pdwReturnedProductType);
 
         /// <summary>
         /// used to get memory available
