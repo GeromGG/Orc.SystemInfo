@@ -22,6 +22,26 @@ namespace Orc.SystemInfo.Win32
         [DllImport("kernel32.dll", SetLastError = false)]
         public static extern bool GetProductInfo(int dwOSMajorVersion, int dwOSMinorVersion, int dwSpMajorVersion, int dwSpMinorVersion, out int pdwReturnedProductType);
 
+        [DllImport("kernel32", SetLastError = true)]
+        private static extern bool GetVersionEx(ref OSVersionInfoEx osvi);
+
+        [StructLayout(LayoutKind.Sequential)]
+        private class OSVersionInfoEx
+        {
+            public uint dwOSVersionInfoSize;
+            public uint dwMajorVersion;
+            public uint dwMinorVersion;
+            public uint dwBuildNumber;
+            public uint dwPlatformId;
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 128)]
+            public string szCSDVersion;
+            public UInt16 wServicePackMajor;
+            public UInt16 wServicePackMinor;
+            public UInt16 wSuiteMask;
+            public byte wProductType;
+            public byte wReserved;
+        }
+
         /// <summary>
         /// used to get memory available
         /// </summary>
@@ -66,8 +86,10 @@ namespace Orc.SystemInfo.Win32
         };
 
         internal const ushort PROCESSOR_ARCHITECTURE_INTEL = 0;
+        internal const ushort PROCESSOR_ARCHITECTURE_ARM = 5;
         internal const ushort PROCESSOR_ARCHITECTURE_IA64 = 6;
         internal const ushort PROCESSOR_ARCHITECTURE_AMD64 = 9;
+        internal const ushort PROCESSOR_ARCHITECTURE_ARM64 = 12;
         internal const ushort PROCESSOR_ARCHITECTURE_UNKNOWN = 0xFFFF;
     }
 }
