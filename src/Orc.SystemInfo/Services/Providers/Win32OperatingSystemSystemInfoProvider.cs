@@ -1,5 +1,6 @@
 ﻿namespace Orc.SystemInfo
 {
+    using System;
     using System.Collections.Generic;
     using Catel.Logging;
     using Catel.Services;
@@ -19,16 +20,27 @@
         public IEnumerable<SystemInfoElement> GetSystemInfoElements()
         {
             var items = new List<SystemInfoElement>();
+            var notAvailable = _languageService.GetString("SystemInfo_NotAvailable");
 
             var systemInfo = new Kernel32.SystemInfo();
             Kernel32.GetNativeSystemInfo(systemInfo);
+
+            var osVersionInfo = new Kernel32.OSVersionInfoEx();
+            Version OSVersion = null;
+            if (Kernel32.GetVersionExA(osVersionInfo))
+            {
+                // Returns incorrect value depends on application manifest
+                // note: https://docs.microsoft.com/en-us/windows/win32/api/sysinfoapi/nf-sysinfoapi-getversionexa
+                OSVersion = osVersionInfo.GetOSVersion();
+            }
 
             var processorArchitecture = systemInfo.wProcessorArchitecture.ToString();
             // items.Add(new SystemInfoElement(_languageService.GetString("SystemInfo_OsName"), wmi.GetValue("Caption", notAvailable)));
             items.Add(new SystemInfoElement(_languageService.GetString("SystemInfo_Architecture"), processorArchitecture));
             // __cpuid, see: https://docs.microsoft.com/ru-ru/cpp/intrinsics/cpuid-cpuidex?view=msvc-160;
-            // items.Add(new SystemInfoElement(_languageService.GetString("SystemInfo_ProcessorId"), wmi.GetValue("ProcessorId", notAvailable)));
-            // items.Add(new SystemInfoElement(_languageService.GetString("SystemInfo_Build"), wmi.GetValue("BuildNumber", notAvailable)));
+            // Not Implemented
+            items.Add(new SystemInfoElement(_languageService.GetString("SystemInfo_ProcessorId"), notAvailable));
+            items.Add(new SystemInfoElement(_languageService.GetString("SystemInfo_Build"), OSVersion?.Build.ToString() ?? notAvailable));
             // count from lpMaximumApplicationAddress;
             //items.Add(new SystemInfoElement(_languageService.GetString("SystemInfo_MaxProcossRam"), (wmi.GetLongValue("MaxProcessMemorySize")).ToReadableSize(1))); // KB
 

@@ -23,7 +23,7 @@ namespace Orc.SystemInfo.Win32
         public static extern bool GetProductInfo(int dwOSMajorVersion, int dwOSMinorVersion, int dwSpMajorVersion, int dwSpMinorVersion, out int pdwReturnedProductType);
 
         [DllImport("kernel32", SetLastError = true)]
-        private static extern bool GetVersionEx([In, Out] OSVersionInfoEx osvi);
+        public static extern bool GetVersionExA([In, Out] OSVersionInfoEx osvi);
 
         [StructLayout(LayoutKind.Sequential)]
         public class OSVersionInfoEx
@@ -40,6 +40,11 @@ namespace Orc.SystemInfo.Win32
             public UInt16 wSuiteMask;
             public byte wProductType;
             public byte wReserved;
+
+            public OSVersionInfoEx()
+            {
+                dwOSVersionInfoSize = (uint)Marshal.SizeOf(typeof(OSVersionInfoEx));
+            }
         }
 
         /// <summary>
