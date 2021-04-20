@@ -34,9 +34,8 @@
                 OSVersion = osVersionInfo.GetOSVersion();
             }
 
-            var processorArchitecture = systemInfo.wProcessorArchitecture.ToString();
             // items.Add(new SystemInfoElement(_languageService.GetString("SystemInfo_OsName"), wmi.GetValue("Caption", notAvailable)));
-            items.Add(new SystemInfoElement(_languageService.GetString("SystemInfo_Architecture"), ProcessorArchitectureString(processorArchitecture)));
+            items.Add(new SystemInfoElement(_languageService.GetString("SystemInfo_Architecture"), ProcessorArchitectureString(systemInfo.wProcessorArchitecture)));
             // __cpuid, see: https://docs.microsoft.com/ru-ru/cpp/intrinsics/cpuid-cpuidex?view=msvc-160;
             // Not Implemented
             items.Add(new SystemInfoElement(_languageService.GetString("SystemInfo_ProcessorId"), notAvailable));

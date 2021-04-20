@@ -50,6 +50,7 @@ namespace Orc.SystemInfo
         }
 
         #region ISystemInfoService Members
+
         [Time]
         public IEnumerable<SystemInfoElement> GetSystemInfo()
         {
@@ -64,6 +65,7 @@ namespace Orc.SystemInfo
             items.Add(new SystemInfoElement(_languageService.GetString("SystemInfo_MachineName"), Environment.MachineName));
             items.Add(new SystemInfoElement(_languageService.GetString("SystemInfo_OsVersion"), Environment.OSVersion.ToString()));
             items.Add(new SystemInfoElement(_languageService.GetString("SystemInfo_Version"), Environment.Version.ToString()));
+            
             //________________________________________________________________________
             items.AddRange(_win32OperatingSystemSystemInfoProvider.GetSystemInfoElements());
             items.AddRange(_wmiOperatingSystemSystemInfoProvider.GetSystemInfoElements());
