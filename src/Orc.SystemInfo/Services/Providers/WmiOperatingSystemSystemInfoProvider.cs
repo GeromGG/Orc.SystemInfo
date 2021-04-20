@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Management;
-    using System.Text;
     using Catel.Logging;
     using Catel.Services;
 
@@ -13,6 +12,7 @@
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
 
         private readonly ILanguageService _languageService;
+
         public WmiOperatingSystemSystemInfoProvider(ILanguageService languageService)
         {
             _languageService = languageService;

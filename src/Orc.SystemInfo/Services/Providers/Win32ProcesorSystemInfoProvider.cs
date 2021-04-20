@@ -1,10 +1,10 @@
 ﻿namespace Orc.SystemInfo
 {
-    using System;
     using System.Collections.Generic;
-    using System.Text;
     using Catel.Logging;
     using Catel.Services;
+    using Orc.SystemInfo.Win32;
+    using static Orc.SystemInfo.Win32.Kernel32;
 
     public class Win32ProcesorSystemInfoProvider : ISystemInfoProvider
     {
@@ -18,7 +18,8 @@
         }
         public IEnumerable<SystemInfoElement> GetSystemInfoElements()
         {
-            throw new NotImplementedException();
+            var items = new List<SystemInfoElement>();
+            return items;
         }
     }
 }

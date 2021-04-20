@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Management;
-    using System.Text;
     using Catel.Logging;
     using Catel.Services;
     public class WmiProcesorSystemInfoProvider : ISystemInfoProvider
@@ -12,6 +11,7 @@
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
 
         private readonly ILanguageService _languageService;
+
         public WmiProcesorSystemInfoProvider(ILanguageService languageService)
         {
             _languageService = languageService;

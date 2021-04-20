@@ -1,14 +1,12 @@
 ﻿namespace Orc.SystemInfo
 {
-    using System;
     using System.Collections.Generic;
-    using System.Text;
     using Catel.Logging;
     using Catel.Services;
+    using Orc.SystemInfo.Win32;
 
     public class Win32OperatingSystemSystemInfoProvider : ISystemInfoProvider
     {
-
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
 
         private readonly ILanguageService _languageService;
@@ -20,7 +18,21 @@
 
         public IEnumerable<SystemInfoElement> GetSystemInfoElements()
         {
-            throw new NotImplementedException();
+            var items = new List<SystemInfoElement>();
+
+            var systemInfo = new Kernel32.SystemInfo();
+            Kernel32.GetNativeSystemInfo(systemInfo);
+
+            var processorArchitecture = systemInfo.wProcessorArchitecture.ToString();
+            // items.Add(new SystemInfoElement(_languageService.GetString("SystemInfo_OsName"), wmi.GetValue("Caption", notAvailable)));
+            items.Add(new SystemInfoElement(_languageService.GetString("SystemInfo_Architecture"), processorArchitecture));
+            // __cpuid, see: https://docs.microsoft.com/ru-ru/cpp/intrinsics/cpuid-cpuidex?view=msvc-160;
+            // items.Add(new SystemInfoElement(_languageService.GetString("SystemInfo_ProcessorId"), wmi.GetValue("ProcessorId", notAvailable)));
+            // items.Add(new SystemInfoElement(_languageService.GetString("SystemInfo_Build"), wmi.GetValue("BuildNumber", notAvailable)));
+            // count from lpMaximumApplicationAddress;
+            //items.Add(new SystemInfoElement(_languageService.GetString("SystemInfo_MaxProcossRam"), (wmi.GetLongValue("MaxProcessMemorySize")).ToReadableSize(1))); // KB
+
+            return items;
         }
     }
 }

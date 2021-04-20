@@ -65,7 +65,7 @@ namespace Orc.SystemInfo
             items.Add(new SystemInfoElement(_languageService.GetString("SystemInfo_OsVersion"), Environment.OSVersion.ToString()));
             items.Add(new SystemInfoElement(_languageService.GetString("SystemInfo_Version"), Environment.Version.ToString()));
             //________________________________________________________________________
-            //items.AddRange(_win32OperatingSystemSystemInfoProvider.GetSystemInfoElements());
+            items.AddRange(_win32OperatingSystemSystemInfoProvider.GetSystemInfoElements());
             items.AddRange(_wmiOperatingSystemSystemInfoProvider.GetSystemInfoElements());
             //________________________________________________________________________
 
@@ -74,16 +74,6 @@ namespace Orc.SystemInfo
             {
                 items.Add(new SystemInfoElement(_languageService.GetString("SystemInfo_TotalMemory"), memStatus.ullTotalPhys.ToReadableSize()));
                 items.Add(new SystemInfoElement(_languageService.GetString("SystemInfo_AvailableMemory"), memStatus.ullAvailPhys.ToReadableSize()));
-            }
-
-            var systemInfo = new Kernel32.SystemInfo();
-            try
-            {
-                Kernel32.GetNativeSystemInfo(systemInfo);
-            }
-            catch(Exception)
-            {
-                // TODO
             }
 
             //________________________________________________________________________

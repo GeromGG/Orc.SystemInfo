@@ -23,10 +23,10 @@ namespace Orc.SystemInfo.Win32
         public static extern bool GetProductInfo(int dwOSMajorVersion, int dwOSMinorVersion, int dwSpMajorVersion, int dwSpMinorVersion, out int pdwReturnedProductType);
 
         [DllImport("kernel32", SetLastError = true)]
-        private static extern bool GetVersionEx(ref OSVersionInfoEx osvi);
+        private static extern bool GetVersionEx([In, Out] OSVersionInfoEx osvi);
 
         [StructLayout(LayoutKind.Sequential)]
-        private class OSVersionInfoEx
+        public class OSVersionInfoEx
         {
             public uint dwOSVersionInfoSize;
             public uint dwMajorVersion;
@@ -78,11 +78,6 @@ namespace Orc.SystemInfo.Win32
             public uint dwAllocationGranularity;
             public ushort wProcessorLevel;
             public ushort wProcessorRevision;
-
-            //public SystemInfo()
-            //{
-            //    dwLength = (uint)Marshal.SizeOf(typeof(MemoryStatusEx));
-            //}
         };
 
         internal const ushort PROCESSOR_ARCHITECTURE_INTEL = 0;
