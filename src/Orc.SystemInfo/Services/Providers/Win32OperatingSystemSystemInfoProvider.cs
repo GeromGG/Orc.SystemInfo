@@ -40,8 +40,7 @@
             // Not Implemented
             items.Add(new SystemInfoElement(_languageService.GetString("SystemInfo_ProcessorId"), notAvailable));
             items.Add(new SystemInfoElement(_languageService.GetString("SystemInfo_Build"), OSVersion?.Build.ToString() ?? notAvailable));
-            // count from lpMaximumApplicationAddress;
-            //items.Add(new SystemInfoElement(_languageService.GetString("SystemInfo_MaxProcossRam"), (wmi.GetLongValue("MaxProcessMemorySize")).ToReadableSize(1))); // KB
+            items.Add(new SystemInfoElement(_languageService.GetString("SystemInfo_MaxProcossRam"), systemInfo.GetHighestAccessibleMemoryAddress().ToReadableSize(0)));
 
             return items;
         }
@@ -77,8 +76,5 @@
 
             return processorArchitect;
         }
-
-
-
     }
 }
