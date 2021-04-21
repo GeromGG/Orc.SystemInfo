@@ -91,11 +91,5 @@ namespace Orc.SystemInfo.Win32
         internal const ushort PROCESSOR_ARCHITECTURE_AMD64 = 9;
         internal const ushort PROCESSOR_ARCHITECTURE_ARM64 = 12;
         internal const ushort PROCESSOR_ARCHITECTURE_UNKNOWN = 0xFFFF;
-
-
-
-
-
-
     }
 }
