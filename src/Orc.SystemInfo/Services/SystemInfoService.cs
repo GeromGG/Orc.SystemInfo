@@ -44,9 +44,9 @@ namespace Orc.SystemInfo
             _dbProviderService = dbProviderService;
 
             _win32OperatingSystemSystemInfoProvider = new Win32OperatingSystemSystemInfoProvider(languageService);
-            _win32ProcesorSystemInfoProvider = new Win32ProcesorSystemInfoProvider(languageService);
+            _win32ProcesorSystemInfoProvider = new Win32ProcessorSystemInfoProvider(languageService);
             _wmiOperatingSystemSystemInfoProvider = new WmiOperatingSystemSystemInfoProvider(languageService);
-            _wmiProcesorSystemInfoProvider = new WmiProcesorSystemInfoProvider(languageService);
+            _wmiProcesorSystemInfoProvider = new WmiProcessorSystemInfoProvider(languageService);
         }
 
         #region ISystemInfoService Members

@@ -6,13 +6,13 @@
     using Orc.SystemInfo.Win32;
     using static Orc.SystemInfo.Win32.Kernel32;
 
-    public class Win32ProcesorSystemInfoProvider : ISystemInfoProvider
+    public class Win32ProcessorSystemInfoProvider : ISystemInfoProvider
     {
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
 
         private readonly ILanguageService _languageService;
 
-        public Win32ProcesorSystemInfoProvider(ILanguageService languageService)
+        public Win32ProcessorSystemInfoProvider(ILanguageService languageService)
         {
             _languageService = languageService;
         }
