@@ -22,7 +22,7 @@ namespace Orc.SystemInfo.Win32
         [DllImport("kernel32.dll", SetLastError = false)]
         public static extern bool GetProductInfo(int dwOSMajorVersion, int dwOSMinorVersion, int dwSpMajorVersion, int dwSpMinorVersion, out int pdwReturnedProductType);
 
-        [DllImport("kernel32", SetLastError = true)]
+        [DllImport("kernel32.dll", SetLastError = true)]
         public static extern bool GetVersionExA([In, Out] OSVersionInfoEx osvi);
 
         [StructLayout(LayoutKind.Sequential)]
