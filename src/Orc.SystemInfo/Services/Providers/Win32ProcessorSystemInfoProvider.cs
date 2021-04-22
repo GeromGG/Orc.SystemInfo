@@ -1,5 +1,6 @@
 ﻿namespace Orc.SystemInfo
 {
+    using System;
     using System.Collections.Generic;
     using Catel.Logging;
     using Catel.Services;
@@ -18,8 +19,25 @@
         }
         public IEnumerable<SystemInfoElement> GetSystemInfoElements()
         {
-            var items = new List<SystemInfoElement>();
-            return items;
+            try
+            {
+                var items = new List<SystemInfoElement>();
+
+                using (WmiConnection connection = new WmiConnection())
+                {
+                    foreach (WmiObject partition in connection.CreateQuery("SELECT * FROM Win32_DiskPartition"))
+                    {
+                        Log.Info($"partition name - {partition["Name"]}");
+                    }
+                }
+
+                return items;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+                throw;
+            }
         }
     }
 }

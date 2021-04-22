@@ -1,6 +1,7 @@
 ﻿using Catel.IoC;
 using Catel.Services;
 using Orc.SystemInfo;
+using Orc.SystemInfo.Win32;
 
 /// <summary>
 /// Used by the ModuleInit. All code inside the Initialize method is ran as soon as the assembly is loaded.
@@ -22,5 +23,13 @@ public static partial class ModuleInitializer
 
         var languageService = serviceLocator.ResolveType<ILanguageService>();
         languageService.RegisterLanguageSource(new LanguageResourceSource("Orc.SystemInfo", "Orc.SystemInfo.Properties", "Resources"));
+
+        using (WmiConnection connection = new WmiConnection())
+        {
+            foreach (WmiObject partition in connection.CreateQuery("SELECT * FROM Win32_DiskPartition"))
+            {
+               
+            }
+        }
     }
 }

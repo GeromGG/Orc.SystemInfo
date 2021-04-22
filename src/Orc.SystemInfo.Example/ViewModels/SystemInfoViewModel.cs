@@ -40,7 +40,9 @@ namespace Orc.SystemInfo.Example.ViewModels
 
             try
             {
-                var systemInfo = await TaskHelper.Run(() => _systemInfoService.GetSystemInfo(), true);
+                var systemInfo = _systemInfoService.GetSystemInfo();
+
+                systemInfo = await TaskHelper.Run(() => _systemInfoService.GetSystemInfo(), true);
                 var systemInfoLines = systemInfo.Select(x => string.Format("{0} {1}", x.Name, x.Value));
                 SystemInfo = string.Join("\n", systemInfoLines);
             }

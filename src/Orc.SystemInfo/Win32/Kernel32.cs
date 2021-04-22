@@ -25,6 +25,12 @@ namespace Orc.SystemInfo.Win32
         [DllImport("kernel32.dll", SetLastError = true)]
         public static extern bool GetVersionExA([In, Out] OSVersionInfoEx osvi);
 
+        [DllImport("kernel32.dll")]
+        public static extern IntPtr LoadLibrary(string fileName);
+
+        [DllImport("kernel32.dll")]
+        public static extern IntPtr GetProcAddress(IntPtr hModule, string procname);
+
         [StructLayout(LayoutKind.Sequential)]
         public class OSVersionInfoEx
         {

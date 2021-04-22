@@ -80,7 +80,7 @@ namespace Orc.SystemInfo
 
             //________________________________________________________________________
 
-            //items.AddRange(_win32ProcesorSystemInfoProvider.GetSystemInfoElements());
+            items.AddRange(_win32ProcesorSystemInfoProvider.GetSystemInfoElements());
             items.AddRange(_wmiProcesorSystemInfoProvider.GetSystemInfoElements());
             //________________________________________________________________________
 
