@@ -23,13 +23,5 @@ public static partial class ModuleInitializer
 
         var languageService = serviceLocator.ResolveType<ILanguageService>();
         languageService.RegisterLanguageSource(new LanguageResourceSource("Orc.SystemInfo", "Orc.SystemInfo.Properties", "Resources"));
-
-        using (WmiConnection connection = new WmiConnection())
-        {
-            foreach (WmiObject partition in connection.CreateQuery("SELECT * FROM Win32_DiskPartition"))
-            {
-               
-            }
-        }
     }
 }

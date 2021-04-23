@@ -26,6 +26,11 @@
         {
         }
 
+        public string Wql
+        {
+            get { return _wql; }
+        }
+
         public EnumeratorBehaviorOption EnumeratorBehaviorOption
         {
             get { return _enumeratorBehaviorOptions; }

@@ -106,7 +106,7 @@
 
             WbemClassObjectEnumeratorBehaviorOption behaviorOption = (WbemClassObjectEnumeratorBehaviorOption)query.EnumeratorBehaviorOption;
 
-            enumerator = _wbemServices.ExecQuery(query.ToString(), behaviorOption, _context);
+            enumerator = _wbemServices.ExecQuery(query.Wql, behaviorOption, _context);
 
             return enumerator;
         }
